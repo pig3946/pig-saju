@@ -112,19 +112,21 @@ select:focus, input:focus { border-color: #667eea; }
 .tool-desc {
   background: linear-gradient(135deg, #F3E5F5, #E1BEE7);
   border: 1px solid #CE93D8; border-radius: 14px;
-  padding: 18px 20px; margin-top: 20px;
+  padding: 14px 18px; margin-top: 20px;
 }
-.tool-desc-title {
-  font-size: 14px; font-weight: 800; color: #4A148C;
-  margin-bottom: 10px; display: flex; align-items: center; gap: 6px;
+.tool-desc summary {
+  cursor: pointer; font-weight: 700; font-size: 13px; color: #6A1B9A;
+  list-style: none; user-select: none;
 }
-.tool-desc-list { list-style: none; padding: 0; }
+.tool-desc summary::-webkit-details-marker { display: none; }
+.tool-desc-list { list-style: none; padding: 0; margin: 10px 0 0; }
 .tool-desc-list li {
   font-size: 12px; color: #555; padding: 4px 0;
   padding-left: 16px; position: relative; line-height: 1.6;
 }
 .tool-desc-list li::before { content: '✓'; position: absolute; left: 0; color: #9C27B0; font-weight: 700; }
 .tool-desc-note { font-size: 11px; color: #999; margin-top: 10px; border-top: 1px solid #CE93D8; padding-top: 8px; }
+.tool-footer { text-align: center; color: #aaa; font-size: 11px; margin-top: 10px; }
 </style>
 </head>
 <body>
@@ -255,17 +257,20 @@ select:focus, input:focus { border-color: #667eea; }
     </a>
   </div>
 
-  <div class="tool-desc">
-    <div class="tool-desc-title">🔮 이 운세 계산기는 어떻게 작동하나요?</div>
-    <ul class="tool-desc-list">
-      <li><b>입춘 기반 사주 연도:</b> 입춘(2월 3~5일) 전에 태어났으면 전년도 띠로 계산해요. 1940~2030년 실제 입춘 날짜 데이터 사용</li>
-      <li><b>사주 4주(四柱):</b> 년주·월주·일주·시주를 천간(10)·지지(12) 60갑자로 계산해 성향을 분석해요</li>
-      <li><b>띠 궁합:</b> 삼합(최상)·육합(좋음)·충(주의)·원진(조심) 관계를 고려해 궁합 점수를 산출해요</li>
-      <li><b>오늘의 운세:</b> 사주 년주·일주를 시드로 날짜별로 다른 운세 문구를 보여드려요 (총 24개 풀)</li>
-      <li><b>금전·연애·건강·직장운:</b> 분야별 20~15개 운세 풀에서 조합해 보여드려요</li>
-    </ul>
-    <p class="tool-desc-note">※ 이 운세는 재미와 참고 목적의 간이 분석이에요. 전통 사주명리학의 전문 분석과는 다를 수 있어요. 중요한 결정은 전문가와 상담하세요.</p>
-  </div>
+  <details class="tool-desc">
+    <summary>🛠️ 이 운세 계산기는 어떻게 작동하나요? ▼</summary>
+    <div style="padding:4px 0 0;">
+      <ul class="tool-desc-list">
+        <li><b>입춘 기반 사주 연도:</b> 입춘(2월 3~5일) 전에 태어났으면 전년도 띠로 계산해요. 1940~2030년 실제 입춘 날짜 데이터 사용</li>
+        <li><b>사주 4주(四柱):</b> 년주·월주·일주·시주를 천간(10)·지지(12) 60갑자로 계산해 성향을 분석해요</li>
+        <li><b>띠 궁합:</b> 삼합(최상)·육합(좋음)·충(주의)·원진(조심) 관계를 고려해 궁합 점수를 산출해요</li>
+        <li><b>오늘의 운세:</b> 사주 년주·일주를 시드로 날짜별로 다른 운세 문구를 보여드려요 (총 24개 풀)</li>
+        <li><b>금전·연애·건강·직장운:</b> 분야별 20~15개 운세 풀에서 조합해 보여드려요</li>
+      </ul>
+      <p class="tool-desc-note">※ 이 운세는 재미와 참고 목적의 간이 분석이에요. 전통 사주명리학의 전문 분석과는 다를 수 있어요. 중요한 결정은 전문가와 상담하세요.</p>
+    </div>
+  </details>
+  <p class="tool-footer">© 피그의 일상정리</p>
 </div>
 
 <script>
