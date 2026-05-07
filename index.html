@@ -7,15 +7,15 @@
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body {
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   min-height: 100vh; padding: 20px;
   display: flex; justify-content: center; align-items: flex-start;
 }
 .container {
   background: #fff; border-radius: 20px; padding: 32px;
-  max-width: 500px; width: 100%; margin-top: 20px;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+  max-width: 520px; width: 100%; margin-top: 20px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.18);
 }
 h1 { font-size: 22px; text-align: center; margin-bottom: 8px; }
 .subtitle { text-align: center; color: #888; font-size: 13px; margin-bottom: 24px; }
@@ -24,7 +24,7 @@ h1 { font-size: 22px; text-align: center; margin-bottom: 8px; }
 .input-row { display: flex; gap: 8px; }
 select, input[type="number"] {
   flex: 1; padding: 12px; border: 2px solid #e0e0e0; border-radius: 10px;
-  font-size: 16px; outline: none; transition: border 0.2s;
+  font-size: 16px; outline: none; transition: border 0.2s; background: #fff;
 }
 select:focus, input:focus { border-color: #667eea; }
 .btn {
@@ -34,16 +34,79 @@ select:focus, input:focus { border-color: #667eea; }
 }
 .btn:hover { transform: scale(1.02); }
 .btn:active { transform: scale(0.98); }
-.result { display: none; margin-top: 24px; }
-.result-card {
-  background: #f8f9fa; border-radius: 12px; padding: 20px; margin-bottom: 12px;
+.btn-outline {
+  width: 100%; padding: 12px; background: #fff;
+  color: #667eea; border: 2px solid #667eea; border-radius: 12px;
+  font-size: 15px; font-weight: 700; cursor: pointer; margin-top: 10px;
+  transition: all 0.2s;
 }
-.result-card h3 { font-size: 16px; margin-bottom: 8px; }
-.result-card p { font-size: 14px; line-height: 1.8; color: #555; }
-.highlight { background: #E8F5E9; border-left: 4px solid #43A047; padding: 12px 16px; border-radius: 0 8px 8px 0; margin: 12px 0; }
+.btn-outline:hover { background: #f0f0ff; }
+.result { display: none; margin-top: 24px; }
+
+/* 카드 기본 */
+.result-card {
+  border-radius: 14px; padding: 18px 20px; margin-bottom: 12px;
+}
+.result-card h3 { font-size: 15px; margin-bottom: 8px; font-weight: 700; }
+.result-card p { font-size: 14px; line-height: 1.85; }
+
+/* 카드별 색상 */
+.card-animal  { background: #FFF8E1; color: #5D4037; }
+.card-element { background: #E8F5E9; color: #2E7D32; }
+.card-star    { background: linear-gradient(135deg, #667eea22, #764ba222);
+                border: 2px solid #667eea44; }
+.card-fortune { background: linear-gradient(135deg, #E8EAF6, #EDE7F6);
+                border-left: 4px solid #5C6BC0; }
+.card-money   { background: #E3F2FD; color: #0D47A1; }
+.card-love    { background: #FCE4EC; color: #880E4F; }
+.card-health  { background: #E8F5E9; color: #1B5E20; }
+.card-work    { background: #FFF3E0; color: #BF360C; }
+.card-lucky   { background: #F3E5F5; color: #4A148C; }
+
+/* 별점 */
+.stars { font-size: 22px; letter-spacing: 3px; }
+.star-score { font-size: 13px; color: #666; margin-top: 4px; }
+
+/* 입춘 안내 */
+.ipchun-note {
+  background: #FFF3E0; border: 1px solid #FFB74D;
+  border-radius: 10px; padding: 12px 16px; margin-bottom: 12px;
+  font-size: 13px; color: #E65100; line-height: 1.7;
+}
+
+/* 사주 4주 */
+.pillars {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px;
+  margin: 10px 0 4px;
+}
+.pillar {
+  background: #f8f9fa; border-radius: 8px; padding: 8px 4px;
+  text-align: center; font-size: 12px; color: #555;
+}
+.pillar .pillar-label { font-size: 10px; color: #aaa; margin-bottom: 3px; }
+.pillar .pillar-val { font-size: 15px; font-weight: 700; color: #333; }
+
+/* 궁합 섹션 */
+.compat-section { display: none; margin-top: 20px; border-top: 1px solid #eee; padding-top: 20px; }
+.compat-result {
+  background: linear-gradient(135deg, #fff8e1, #fce4ec);
+  border-radius: 12px; padding: 16px; margin-top: 12px; display: none;
+}
+.compat-stars { font-size: 24px; letter-spacing: 4px; }
+.compat-desc { font-size: 14px; color: #555; margin-top: 6px; line-height: 1.7; }
+
+/* 공유 버튼 */
+.share-btn {
+  width: 100%; padding: 13px; background: #FEE500;
+  color: #3A1D1D; border: none; border-radius: 12px;
+  font-size: 15px; font-weight: 700; cursor: pointer; margin-top: 10px;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  transition: transform 0.1s;
+}
+.share-btn:hover { transform: scale(1.02); }
 .blog-link {
-  display: block; text-align: center; margin-top: 20px; padding: 12px;
-  background: #03C75A; color: #fff; border-radius: 10px;
+  display: block; text-align: center; margin-top: 10px; padding: 13px;
+  background: #03C75A; color: #fff; border-radius: 12px;
   text-decoration: none; font-weight: 700; font-size: 15px;
 }
 .footer { text-align: center; color: #aaa; font-size: 11px; margin-top: 16px; }
@@ -89,49 +152,107 @@ select:focus, input:focus { border-color: #667eea; }
   </div>
 
   <button class="btn" onclick="calculate()">🔮 내 운세 보기</button>
+  <button class="btn-outline" onclick="toggleCompat()">💑 상성 궁합 보기</button>
 
-  <div class="result" id="result">
-    <div class="result-card">
-      <h3>🐲 <span id="r-animal"></span></h3>
-      <p id="r-animal-desc"></p>
+  <!-- 궁합 입력 -->
+  <div class="compat-section" id="compatSection">
+    <p style="font-size:14px;font-weight:700;margin-bottom:12px;color:#555;">💑 상대방 생년 입력</p>
+    <div class="input-row">
+      <input type="number" id="compat-year" placeholder="상대방 태어난 해" min="1940" max="2025" style="flex:2">
+      <button class="btn" style="flex:1;margin-top:0;padding:12px 8px;font-size:14px;" onclick="calcCompat()">확인</button>
     </div>
-    <div class="result-card">
+    <div class="compat-result" id="compatResult">
+      <div class="compat-stars" id="c-stars"></div>
+      <p id="c-animals" style="font-size:14px;font-weight:700;margin:8px 0 4px;"></p>
+      <p class="compat-desc" id="c-desc"></p>
+    </div>
+  </div>
+
+  <!-- 결과 영역 -->
+  <div class="result" id="result">
+
+    <!-- 입춘 안내 (조건부) -->
+    <div class="ipchun-note" id="r-ipchun-note" style="display:none"></div>
+
+    <!-- 사주 4주 -->
+    <div class="result-card card-animal">
+      <h3 id="r-animal-h3">🐲 띠</h3>
+      <p id="r-animal-desc"></p>
+      <div class="pillars" id="r-pillars"></div>
+    </div>
+
+    <!-- 오행 -->
+    <div class="result-card card-element">
       <h3>🌿 오행: <span id="r-element"></span></h3>
       <p id="r-element-desc"></p>
     </div>
-    <div class="result-card highlight">
-      <h3>⭐ 오늘의 개인 운세</h3>
+
+    <!-- 총운 별점 -->
+    <div class="result-card card-star">
+      <h3>⭐ 오늘의 총운</h3>
+      <div class="stars" id="r-stars"></div>
+      <p class="star-score" id="r-star-score"></p>
+    </div>
+
+    <!-- 종합운 -->
+    <div class="result-card card-fortune">
+      <h3>✨ 오늘의 개인 운세</h3>
       <p id="r-fortune"></p>
     </div>
-    <div class="result-card">
+
+    <!-- 금전운 -->
+    <div class="result-card card-money">
       <h3>💰 금전운</h3>
       <p id="r-money"></p>
     </div>
-    <div class="result-card">
+
+    <!-- 연애운 -->
+    <div class="result-card card-love">
       <h3>💕 연애운</h3>
       <p id="r-love"></p>
     </div>
-    <div class="result-card">
+
+    <!-- 건강운 -->
+    <div class="result-card card-health">
+      <h3>🍃 건강운</h3>
+      <p id="r-health"></p>
+    </div>
+
+    <!-- 직장운 -->
+    <div class="result-card card-work">
+      <h3>💼 직장·학업운</h3>
+      <p id="r-work"></p>
+    </div>
+
+    <!-- 럭키 -->
+    <div class="result-card card-lucky">
       <h3>🍀 럭키 포인트</h3>
       <p id="r-lucky"></p>
     </div>
+
+    <!-- 공유 버튼 -->
+    <button class="share-btn" onclick="shareResult()">
+      <span style="font-size:18px;">💬</span> 카카오톡으로 공유하기
+    </button>
+
     <a class="blog-link" href="https://blog.naver.com/pig_lifetime" target="_blank">
       📝 매일 운세 + 경제 정보 보러가기 →
     </a>
   </div>
+
   <p class="footer">© 피그의 일상정리 | 재미로 보는 운세예요 :)</p>
 </div>
 
 <script>
-// 천간 (10개)
+// ── 천간·지지·띠 ─────────────────────────────────────────────────
 const CHEONGAN = ['갑','을','병','정','무','기','경','신','임','계'];
-// 지지 (12개) + 띠
-const JIJI = ['자','축','인','묘','진','사','오','미','신','유','술','해'];
-const ANIMALS = ['🐭 쥐띠','🐮 소띠','🐯 범띠','🐰 토끼띠','🐲 용띠','🐍 뱀띠',
-                 '🐴 말띠','🐑 양띠','🐵 원숭이띠','🐓 닭띠','🐶 개띠','🐷 돼지띠'];
-// 오행
-const ELEMENTS = ['목(木)','화(火)','토(土)','금(金)','수(水)'];
-const ELEMENT_COLORS = ['🌿 나무','🔥 불','⛰️ 흙','⚔️ 쇠','💧 물'];
+const JIJI     = ['자','축','인','묘','진','사','오','미','신','유','술','해'];
+const ANIMALS  = ['🐭 쥐띠','🐮 소띠','🐯 범띠','🐰 토끼띠','🐲 용띠','🐍 뱀띠',
+                  '🐴 말띠','🐑 양띠','🐵 원숭이띠','🐓 닭띠','🐶 개띠','🐷 돼지띠'];
+const ANIMAL_SHORT = ['쥐','소','범','토끼','용','뱀','말','양','원숭이','닭','개','돼지'];
+
+// ── 오행 ─────────────────────────────────────────────────────────
+const ELEMENT_LABELS = ['🌿 목(木)','🔥 화(火)','⛰️ 토(土)','⚔️ 금(金)','💧 수(水)'];
 const ELEMENT_DESC = [
   '창의적이고 성장 에너지가 강해요. 새로운 시작에 유리한 기운이에요.',
   '열정적이고 활동적인 에너지예요. 적극적으로 도전하면 좋은 결과가 따라요.',
@@ -140,94 +261,390 @@ const ELEMENT_DESC = [
   '지혜롭고 유연한 에너지예요. 상황에 맞게 적응하는 능력이 뛰어나요.'
 ];
 
-// 오늘 날짜 기반 시드
-const today = new Date();
+// ── 입춘 날짜 테이블 (1940~2030, 양력) ──────────────────────────
+// 기본값 Feb 4, 예외 명시
+const IPCHUN_DAY = {};
+for (let y = 1940; y <= 2030; y++) IPCHUN_DAY[y] = 4;
+// Feb 5 (주로 1940~1980년대 일부)
+[1940,1941,1943,1944,1945,1947,1948,1951,1952,1955,
+ 1956,1960,1964,1968,1972,1980].forEach(y => IPCHUN_DAY[y] = 5);
+// Feb 3 (최근 윤년 주기)
+[2017,2021,2025,2029].forEach(y => IPCHUN_DAY[y] = 3);
+
+function getIpchunDate(year) {
+  const d = IPCHUN_DAY[year] || 4;
+  return new Date(year, 1, d); // month=1 → Feb
+}
+
+// 입춘 기준 실제 사주 연도
+function getSajuYear(year, month, day) {
+  const ipchun   = getIpchunDate(year);
+  const birthday = new Date(year, month - 1, day);
+  return birthday < ipchun ? year - 1 : year;
+}
+
+// ── 월주 월간 계산 ────────────────────────────────────────────────
+// 년간 그룹별 인월(2월) 시작 월간
+const START_MONTH_CG = [2, 4, 6, 8, 0]; // 갑/기, 을/경, 병/신, 정/임, 무/계
+function getMonthCG(yearCgIdx, month) {
+  const base = START_MONTH_CG[yearCgIdx % 5];
+  return (base + (month - 2 + 120)) % 10;
+}
+
+// ── 일주 계산 (1900-01-01 갑자일 기준) ───────────────────────────
+function getDayPillar(year, month, day) {
+  const ref  = new Date(1900, 0, 1);
+  const date = new Date(year, month - 1, day);
+  const diff = Math.round((date - ref) / 86400000);
+  return { cg: ((diff % 10) + 10) % 10, jj: ((diff % 12) + 12) % 12 };
+}
+
+// ── 시주 계산 ────────────────────────────────────────────────────
+// 일간 그룹별 자시 시작 시간간
+const START_HOUR_CG = [0, 2, 4, 6, 8]; // 갑/기, 을/경, 병/신, 정/임, 무/계
+function getHourPillar(dayCgIdx, hourIdx) {
+  if (hourIdx < 0) return null;
+  const base = START_HOUR_CG[dayCgIdx % 5];
+  return { cg: (base + hourIdx) % 10, jj: hourIdx % 12 };
+}
+
+// ── 의사 난수 ────────────────────────────────────────────────────
+const today   = new Date();
 const daySeed = today.getFullYear() * 10000 + (today.getMonth()+1) * 100 + today.getDate();
 
 function pseudoRandom(seed) {
-  let x = Math.sin(seed) * 10000;
+  const x = Math.sin(seed + 1) * 10000;
   return x - Math.floor(x);
 }
+function pickIdx(seed, arr) {
+  return Math.floor(pseudoRandom(seed) * arr.length);
+}
 
+// ── 별점 (가중치: 1★5% 2★15% 3★40% 4★30% 5★10%) ────────────────
+function getStarScore(seed) {
+  const r = pseudoRandom(seed + 99);
+  if (r < 0.05) return 1;
+  if (r < 0.20) return 2;
+  if (r < 0.60) return 3;
+  if (r < 0.90) return 4;
+  return 5;
+}
+const STAR_MSGS = [
+  '오늘은 조금 조심스러운 날이에요. 무리하지 말고 쉬어가세요.',
+  '보통보다 살짝 아쉬운 날이에요. 신중하게 행동하면 괜찮아요.',
+  '평범하지만 안정적인 하루예요. 꾸준히 나아가세요!',
+  '운이 좋은 날이에요. 적극적으로 움직이면 좋은 결과가 따라와요!',
+  '오늘은 최고의 날! 하고 싶은 일을 과감하게 도전해보세요! 🎉',
+];
+
+// ── 운세 풀 ──────────────────────────────────────────────────────
+const fortunes = [
+  '오늘은 새로운 기회의 문이 살짝 열려있어요. 먼저 손 내밀어보세요.',
+  '주변 사람들과의 소통에서 뜻밖의 행운이 찾아올 수 있어요.',
+  '작은 변화가 큰 흐름을 만드는 날이에요. 용기 있게 첫걸음을!',
+  '차분하게 계획을 정리하면 생각보다 훨씬 좋은 결과가 따라올 거예요.',
+  '오래 미뤄둔 일을 처리하면 마음도, 운도 한결 가벼워져요.',
+  '예상치 못한 좋은 소식이 들릴 수 있어요. 기대해보세요!',
+  '금전적으로 신중한 하루예요. 큰 지출은 한 번 더 생각하고 결정하세요.',
+  '건강 관리에 최적인 날이에요. 가벼운 스트레칭도 큰 도움이 돼요.',
+  '인간관계에서 따뜻한 말 한마디가 예상 밖의 큰 힘이 될 수 있어요.',
+  '창의적인 아이디어가 샘솟는 날이에요! 떠오르는 생각은 꼭 메모해두세요.',
+  '배움에 집중하면 득이 되는 하루. 새로운 정보가 큰 자산이 돼요.',
+  '과거의 노력들이 하나씩 결실을 맺기 시작하는 시기예요. 자신감을!',
+  '오늘은 혼자 조용히 생각을 정리하는 시간이 필요해요. 내면의 소리를 들어보세요.',
+  '긍정적인 에너지가 넘치는 하루! 주변 사람들에게도 좋은 기운을 나눠주세요.',
+  '집중력이 높아지는 날이에요. 중요한 업무나 공부에 최적의 타이밍이에요.',
+  '직관이 평소보다 뛰어난 날이에요. 첫 느낌을 믿어보는 것도 좋겠어요.',
+  '주변을 정리하고 청소하면 새로운 에너지가 들어올 것 같은 날이에요.',
+  '작은 것에 감사하는 마음이 큰 운을 끌어당겨요.',
+  '밖으로 나가 사람들과 어울리면 좋은 에너지를 받을 수 있어요. 외출 추천!',
+  '성급함을 잠시 내려놓으면 더 좋은 결과를 얻을 수 있어요. 여유를 가지세요.',
+  '오늘은 도전보다 현 상황을 유지하고 관리하는 게 더 유리해요.',
+  '친절하고 배려 있는 행동이 좋은 인연을 만들어주는 날이에요.',
+  '오늘 하루는 자신을 위한 작은 선물 하나 해보세요. 충분히 받을 자격이 있어요.',
+  '복잡한 문제일수록 단순하게 생각해보면 해답이 보여요. 눈을 크게 뜨세요.',
+];
+
+const moneyFortunes = [
+  '예상치 못한 소액 수입이 생길 수 있어요. 작은 행운에 감사!',
+  '오늘은 지갑을 단단히 묶어두세요. 충동 구매 위험이 높은 날이에요.',
+  '투자보다는 저축이 유리한 하루예요. 안전 자산을 점검해보세요.',
+  '가까운 사람과의 금전 거래는 오늘은 피하는 게 좋겠어요.',
+  '재테크 관련 좋은 정보를 접할 수 있는 날. 귀를 열어두세요.',
+  '지출 계획을 세우면 한 달 살림이 훨씬 편해질 거예요.',
+  '할인 행사나 특가 찬스를 잘 활용하면 알뜰한 소비가 될 거예요.',
+  '고정 지출을 다시 한번 점검해보면 숨은 돈을 찾을 수 있어요.',
+  '큰 결정보다 작은 절약 습관이 더 큰 재산이 되는 법이에요.',
+  '돈보다 경험에 투자하는 게 장기적으로 더 이득인 날이에요.',
+  '금전운이 서서히 상승하는 시기예요. 너무 급하게 굴지 말고 천천히!',
+  '불필요한 구독 서비스 정리가 필요한 시기예요. 통장 내역 한번 훑어보세요.',
+  '오늘 마주치는 기회는 신중하게 검토 후 결정하세요. 서두르면 손해!',
+  '수입이 안정적인 시기예요. 이 기회에 비상금 통장을 채워보세요.',
+  '나눔과 베풂이 더 큰 복을 불러오는 날이에요. 소소한 나눔 어때요?',
+  '금전 문서나 계약서는 꼼꼼히 읽고 서명하세요. 나중에 후회할 수 있어요.',
+  '온라인 쇼핑 충동은 3일 뒤에도 사고 싶은지 확인하고 결제하세요.',
+  '금전운은 보통 수준이에요. 욕심을 부리지 말고 안정적으로 관리하세요.',
+  '오래된 영수증이나 정산 서류를 정리하면 잊었던 혜택을 발견할 수 있어요.',
+  '재정적 목표를 다시 점검하고 수정해보세요. 현실적인 계획이 중요해요.',
+];
+
+const loveFortunes = [
+  '솔직한 마음 표현이 관계를 더 깊게 만들어요. 용기 내보세요!',
+  '오늘은 혼자만의 시간도 소중해요. 자기 돌봄에 집중하세요.',
+  '새로운 만남의 기회가 있을 수 있어요. 미소 한번 더 지어보세요!',
+  '연인과 함께하는 소소한 일상이 큰 행복으로 돌아와요.',
+  '오래된 친구에게 연락하면 설레는 인연으로 발전할 수도 있어요.',
+  '상대방의 작은 배려에 감사함을 표현해보세요. 관계가 더 단단해져요.',
+  '오늘 만나는 사람이 소중한 인연이 될 수 있어요. 첫인상에 신경 쓰세요.',
+  '밀고 당기기보다 솔직한 감정 표현이 더 효과적인 날이에요.',
+  '연애 중이라면 오늘 데이트가 특별한 추억이 될 거예요. 계획해보세요!',
+  '썸 타는 관계라면 오늘이 한 발짝 나아갈 좋은 타이밍이에요.',
+  '작은 다툼이 있더라도 먼저 손 내밀면 더 큰 사랑으로 돌아와요.',
+  '연애운은 잠시 정체기예요. 현재 관계를 더 단단히 다지는 시간으로 쓰세요.',
+  '나 자신을 사랑하는 것이 좋은 인연을 불러오는 첫걸음이에요.',
+  '기대가 크면 실망도 크죠. 오늘은 기대치를 낮추고 자연스럽게 지내보세요.',
+  '외모보다 내면의 매력을 발산하는 날이에요. 웃음이 가장 큰 매력이에요!',
+  '연애보다 자기 계발에 집중하면 더 좋은 인연이 알아서 찾아올 거예요.',
+  '소통이 관계의 핵심이에요. 상대방의 이야기를 잘 들어주는 하루 보내보세요.',
+  '갑작스러운 고백보다는 자연스러운 흐름을 따르는 게 좋겠어요.',
+  '오랫동안 마음에 담아온 사람에게 오늘 용기 내어 연락해보는 건 어떨까요?',
+  '연애운이 빛나는 날이에요! 오늘 만난 인연을 소중히 여기세요.',
+];
+
+const healthFortunes = [
+  '목·어깨 쪽에 긴장이 쌓일 수 있어요. 스트레칭으로 풀어주세요!',
+  '소화기관에 주의하세요. 과식보다는 가볍게 드시는 게 좋아요.',
+  '수면 부족이 누적되고 있어요. 오늘은 일찍 잠자리에 드세요.',
+  '눈의 피로가 심할 수 있어요. 화면에서 눈을 자주 쉬게 해주세요.',
+  '건강 관리에 최적의 날이에요. 가벼운 운동이나 산책을 추천해요.',
+  '물을 충분히 마시는 것만으로도 오늘 컨디션이 크게 좋아질 거예요.',
+  '심리적 스트레스가 쌓여있어요. 좋아하는 음악을 들으며 힐링해보세요.',
+  '관절이나 근육에 무리가 가지 않도록 무거운 것은 조심하세요.',
+  '면역력이 살짝 떨어질 수 있는 날이에요. 따뜻하게 입고 다니세요.',
+  '규칙적인 식사가 활력의 비결이에요. 끼니를 거르지 마세요.',
+  '두통이나 편두통에 주의하세요. 물 한 잔과 잠깐의 휴식이 도움이 돼요.',
+  '혈액순환에 좋은 날이에요. 가벼운 산책이나 맨발 걷기 추천!',
+  '몸이 보내는 신호에 귀를 기울이세요. 피로하면 쉬어가도 괜찮아요.',
+  '건강 검진이나 병원 방문을 미루고 있었다면 오늘 예약해보세요.',
+  '멘탈 건강도 신체 건강만큼 중요해요. 오늘은 긍정적인 생각에 집중해보세요.',
+];
+
+const workFortunes = [
+  '상사에게 인정받을 수 있는 기회가 와요. 꼼꼼함을 보여주세요.',
+  '동료와의 협업이 좋은 결과를 만드는 날. 양보도 전략이에요.',
+  '새로운 업무나 프로젝트에서 두각을 나타낼 수 있는 하루예요.',
+  '회의나 발표에서 자신감 있게 의견을 내면 좋은 반응을 얻을 수 있어요.',
+  '창의적인 접근이 빛을 발하는 날이에요. 새로운 방법을 제안해보세요.',
+  '업무 집중력이 높은 날이에요. 밀린 업무를 처리하기에 최고의 타이밍!',
+  '대인관계에서 신중함이 필요해요. 말 한마디가 큰 영향을 줄 수 있어요.',
+  '자기 PR이 중요한 날이에요. 숨기지 말고 성과를 보여주세요.',
+  '스트레스 관리가 업무 효율의 핵심이에요. 짧은 휴식이 큰 도움이 돼요.',
+  '중요한 계약이나 협상이 있다면 오늘이 좋은 타이밍이에요.',
+  '직장에서 새로운 기회가 열릴 수 있어요. 준비된 자에게만 찾아오는 기회예요.',
+  '완벽함을 추구하다 시간을 놓치지 마세요. 80% 완성도로 빠르게 실행이 오늘의 전략.',
+  '이직이나 전직을 고민 중이라면 오늘 좋은 정보를 얻을 수 있어요.',
+  '팀워크가 중요한 날이에요. 혼자보다 함께가 더 강한 결과를 낳아요.',
+  '묵묵히 쌓아온 실력이 인정받기 시작하는 시기예요. 조금만 더 힘내세요!',
+];
+
+const luckyColors  = ['레드','블루','그린','옐로우','퍼플','오렌지','핑크','화이트','브라운','민트'];
+const luckyNums    = [1,2,3,4,5,6,7,8,9];
+const luckyDirs    = ['동','서','남','북','동남','서북'];
+const luckyItems   = ['귤','커피','꽃','초코렛','녹차','책','음악','산책','일기','물'];
+
+// ── 궁합 데이터 ─────────────────────────────────────────────────
+// 삼합: 쥐용원숭이, 소뱀닭, 범말개, 토끼양돼지
+const SAMHAP  = [[0,4,8],[1,5,9],[2,6,10],[3,7,11]];
+// 육합: 쥐소, 범돼지, 토끼개, 용닭, 뱀원숭이, 말양
+const YUKHAP  = [[0,1],[2,11],[3,10],[4,9],[5,8],[6,7]];
+// 충: 쥐말, 소양, 범원숭이, 토끼닭, 용개, 뱀돼지
+const CHUNG   = [[0,6],[1,7],[2,8],[3,9],[4,10],[5,11]];
+// 원진: 쥐양, 소말, 범닭, 토끼원숭이, 용돼지, 뱀개
+const WONJIN  = [[0,7],[1,6],[2,9],[3,8],[4,11],[5,10]];
+
+function getCompatibility(i1, i2) {
+  if (i1 === i2) return { score: 4, stars: '★★★★☆', desc: '같은 띠 조합이에요! 서로를 가장 잘 이해하는 사이가 될 수 있어요.' };
+  const pair = [Math.min(i1,i2), Math.max(i1,i2)];
+  for (const g of SAMHAP)
+    if (g.includes(i1) && g.includes(i2))
+      return { score:5, stars:'★★★★★', desc:`삼합(三合) 조합! 천생연분에 가장 가까운 최고의 궁합이에요. 함께하면 서로가 빛나는 사이예요.` };
+  for (const g of YUKHAP)
+    if (g.includes(i1) && g.includes(i2))
+      return { score:4, stars:'★★★★☆', desc:`육합(六合) 조합! 서로 자연스럽게 끌리는 좋은 궁합이에요. 편안한 관계를 만들어갈 수 있어요.` };
+  for (const g of CHUNG)
+    if (g[0]===pair[0] && g[1]===pair[1])
+      return { score:1, stars:'★☆☆☆☆', desc:`충(沖) 조합이에요. 서로 부딪히기 쉬운 에너지를 가지고 있어요. 배려와 이해가 그 어느 관계보다 더 필요해요.` };
+  for (const g of WONJIN)
+    if (g[0]===pair[0] && g[1]===pair[1])
+      return { score:2, stars:'★★☆☆☆', desc:`원진(怨嗔) 조합이에요. 오해가 생기기 쉬워요. 소통에 더욱 신경 쓰면 충분히 좋은 관계를 만들 수 있어요.` };
+  return { score:3, stars:'★★★☆☆', desc:`보통 궁합이에요. 서로 노력하면 충분히 좋은 관계를 만들어갈 수 있어요.` };
+}
+
+// ── 전역: 마지막 결과 저장 (공유용) ──────────────────────────────
+let lastAnimal = '', lastFortune = '';
+
+// ── 메인 계산 ────────────────────────────────────────────────────
 function calculate() {
-  const year = parseInt(document.getElementById('year').value);
+  const year  = parseInt(document.getElementById('year').value);
   const month = parseInt(document.getElementById('month').value);
-  const day = parseInt(document.getElementById('day').value);
+  const day   = parseInt(document.getElementById('day').value);
+  const hour  = parseInt(document.getElementById('hour').value);
 
   if (!year || !month || !day) { alert('생년월일을 입력해주세요!'); return; }
+  if (year < 1940 || year > 2025) { alert('1940~2025년 사이로 입력해주세요!'); return; }
 
-  // 띠 계산 (음력 기준 간략화: 양력 기준으로 대체)
-  const animalIdx = (year - 4) % 12;
-  const animal = ANIMALS[animalIdx];
+  // ── 입춘 기준 사주 연도 ──────────────────────────────────────
+  const sajuYear = getSajuYear(year, month, day);
 
-  // 천간 → 오행 매핑
-  const cheonganIdx = (year - 4) % 10;
-  const elementIdx = Math.floor(cheonganIdx / 2);
-  const element = ELEMENT_COLORS[elementIdx] + ' ' + ELEMENTS[elementIdx];
+  // ── 년주 ────────────────────────────────────────────────────
+  const yearCg  = ((sajuYear - 4) % 10 + 10) % 10;
+  const yearJj  = ((sajuYear - 4) % 12 + 12) % 12;
+  const elemIdx = Math.floor(yearCg / 2);
 
-  // 개인 시드 (생년월일 + 오늘 날짜 조합)
-  const personalSeed = daySeed + year * 100 + month * 31 + day;
+  // ── 월주 ────────────────────────────────────────────────────
+  const monthCg = getMonthCG(yearCg, month);
+  const monthJj = month % 12; // 1월=축(1), 2월=인(2), ..., 12월=자(0)
 
-  // 운세 문구 풀
-  const fortunes = [
-    '오늘은 새로운 기회가 찾아올 수 있어요. 열린 마음으로 받아들이세요.',
-    '주변 사람들과의 소통이 행운을 가져다줄 거예요. 연락 한 통 해보세요.',
-    '작은 변화가 큰 결과를 만들 수 있는 날이에요. 도전해보세요!',
-    '차분하게 계획을 정리하면 좋은 성과가 따를 거예요.',
-    '오래 미뤄둔 일을 처리하면 마음이 한결 가벼워질 거예요.',
-    '예상치 못한 좋은 소식이 있을 수 있어요. 기대해보세요!',
-    '금전적으로 신중한 판단이 필요한 날이에요. 큰 지출은 한 번 더 생각하세요.',
-    '건강 관리에 신경 쓰면 좋은 날이에요. 가벼운 운동 추천!',
-    '인간관계에서 따뜻한 말 한마디가 큰 힘이 될 거예요.',
-    '창의적인 아이디어가 떠오를 수 있어요. 메모해두세요!',
-    '오늘은 배움에 집중하면 좋겠어요. 새로운 정보가 도움이 될 거예요.',
-    '과거의 노력이 결실을 맺기 시작하는 날이에요. 자신감을 가지세요!'
-  ];
+  // ── 일주 ────────────────────────────────────────────────────
+  const dayP   = getDayPillar(year, month, day);
 
-  const moneyFortunes = [
-    '예상치 못한 소득이 있을 수 있어요. 하지만 충동 구매는 조심!',
-    '투자보다는 저축에 집중하는 게 좋은 날이에요.',
-    '가까운 사람과의 금전 거래는 피하는 게 좋겠어요.',
-    '소소하지만 확실한 절약이 큰 도움이 될 거예요.',
-    '재테크 관련 좋은 정보를 얻을 수 있는 날이에요.',
-    '지출 계획을 세우면 한 달 살림이 편해질 거예요.'
-  ];
+  // ── 시주 ────────────────────────────────────────────────────
+  const hourP  = getHourPillar(dayP.cg, hour);
 
-  const loveFortunes = [
-    '솔직한 마음 표현이 관계를 더 깊게 만들어줄 거예요.',
-    '상대방의 작은 배려에 감사함을 표현해보세요.',
-    '새로운 만남의 기회가 있을 수 있어요. 외출해보세요!',
-    '연인과 함께 맛집 탐방하면 좋은 추억이 될 거예요.',
-    '혼자만의 시간도 소중해요. 자기 돌봄에 집중하세요.',
-    '오래된 친구에게 연락하면 좋은 에너지를 받을 수 있어요.'
-  ];
+  // ── 개인 시드 ────────────────────────────────────────────────
+  const pSeed  = daySeed + year * 100 + month * 31 + day;
 
-  const luckyColors = ['레드','블루','그린','옐로우','퍼플','오렌지','핑크','화이트','브라운','민트'];
-  const luckyNums = [1,2,3,4,5,6,7,8,9];
+  // ── 별점 ────────────────────────────────────────────────────
+  const starScore = getStarScore(pSeed);
+  const starsStr  = '★'.repeat(starScore) + '☆'.repeat(5 - starScore);
 
-  // 시드 기반 선택
-  const fIdx = Math.floor(pseudoRandom(personalSeed) * fortunes.length);
-  const mIdx = Math.floor(pseudoRandom(personalSeed + 1) * moneyFortunes.length);
-  const lIdx = Math.floor(pseudoRandom(personalSeed + 2) * loveFortunes.length);
-  const cIdx = Math.floor(pseudoRandom(personalSeed + 3) * luckyColors.length);
-  const nIdx = Math.floor(pseudoRandom(personalSeed + 4) * luckyNums.length);
+  // ── 운세 선택 ────────────────────────────────────────────────
+  const fortune = fortunes[pickIdx(pSeed,     fortunes)];
+  const money   = moneyFortunes[pickIdx(pSeed+1, moneyFortunes)];
+  const love    = loveFortunes[pickIdx(pSeed+2,  loveFortunes)];
+  const health  = healthFortunes[pickIdx(pSeed+3, healthFortunes)];
+  const work    = workFortunes[pickIdx(pSeed+4,  workFortunes)];
+  const color   = luckyColors[pickIdx(pSeed+5,  luckyColors)];
+  const num     = luckyNums[pickIdx(pSeed+6,    luckyNums)];
+  const dir     = luckyDirs[pickIdx(pSeed+7,    luckyDirs)];
+  const item    = luckyItems[pickIdx(pSeed+8,   luckyItems)];
 
-  // 결과 표시
-  document.getElementById('r-animal').textContent = animal + ` (${CHEONGAN[cheonganIdx]}${JIJI[animalIdx]}년)`;
+  // ── 결과 표시 ────────────────────────────────────────────────
+  const animal = ANIMALS[yearJj];
+  lastAnimal  = animal;
+  lastFortune = fortune;
+
+  // 입춘 전 안내
+  const noteEl = document.getElementById('r-ipchun-note');
+  if (month <= 2 && sajuYear !== year) {
+    const iDate = getIpchunDate(year);
+    noteEl.textContent =
+      `💡 양력 ${year}년 ${month}월 ${day}일생이지만, ` +
+      `입춘(${iDate.getMonth()+1}월 ${iDate.getDate()}일) 이전 출생이라 ` +
+      `사주상으로는 ${sajuYear}년(${animal}) 기준이에요.`;
+    noteEl.style.display = 'block';
+  } else {
+    noteEl.style.display = 'none';
+  }
+
+  // 띠 카드
+  document.getElementById('r-animal-h3').textContent =
+    `${animal}  (${CHEONGAN[yearCg]}${JIJI[yearJj]}년)`;
   document.getElementById('r-animal-desc').textContent =
-    `${year}년생, ${CHEONGAN[cheonganIdx]}${JIJI[animalIdx]}년이에요. ` +
-    `오늘 ${animal.slice(2)}의 기운은 ${['안정적','활발','조용','역동적','평온'][elementIdx]}해요.`;
-  document.getElementById('r-element').textContent = element;
-  document.getElementById('r-element-desc').textContent = ELEMENT_DESC[elementIdx];
-  document.getElementById('r-fortune').textContent = fortunes[fIdx];
-  document.getElementById('r-money').textContent = moneyFortunes[mIdx];
-  document.getElementById('r-love').textContent = loveFortunes[lIdx];
-  document.getElementById('r-lucky').textContent =
-    `럭키 컬러: ${luckyColors[cIdx]} | 럭키 숫자: ${luckyNums[nIdx]} | ` +
-    `오늘의 방향: ${['동','서','남','북'][Math.floor(pseudoRandom(personalSeed+5)*4)]}`;
+    `${sajuYear}년생이에요. 오늘 ${ANIMAL_SHORT[yearJj]}띠의 기운은 ` +
+    `${['안정적','활발','조용','역동적','평온'][elemIdx]}해요.`;
+
+  // 사주 4주
+  const pillarsHTML =
+    `<div class="pillar"><div class="pillar-label">년주</div><div class="pillar-val">${CHEONGAN[yearCg]}${JIJI[yearJj]}</div></div>` +
+    `<div class="pillar"><div class="pillar-label">월주</div><div class="pillar-val">${CHEONGAN[monthCg]}${JIJI[monthJj]}</div></div>` +
+    `<div class="pillar"><div class="pillar-label">일주</div><div class="pillar-val">${CHEONGAN[dayP.cg]}${JIJI[dayP.jj]}</div></div>` +
+    (hourP
+      ? `<div class="pillar"><div class="pillar-label">시주</div><div class="pillar-val">${CHEONGAN[hourP.cg]}${JIJI[hourP.jj]}</div></div>`
+      : `<div class="pillar"><div class="pillar-label">시주</div><div class="pillar-val" style="color:#ccc;">?</div></div>`);
+  document.getElementById('r-pillars').innerHTML = pillarsHTML;
+
+  // 오행
+  document.getElementById('r-element').textContent  = ELEMENT_LABELS[elemIdx];
+  document.getElementById('r-element-desc').textContent = ELEMENT_DESC[elemIdx];
+
+  // 총운 별점
+  document.getElementById('r-stars').textContent      = starsStr;
+  document.getElementById('r-star-score').textContent = `${starScore}점 / 5점 — ${STAR_MSGS[starScore-1]}`;
+
+  // 운세
+  document.getElementById('r-fortune').textContent = fortune;
+  document.getElementById('r-money').textContent   = money;
+  document.getElementById('r-love').textContent    = love;
+  document.getElementById('r-health').textContent  = health;
+  document.getElementById('r-work').textContent    = work;
+  document.getElementById('r-lucky').textContent   =
+    `럭키 컬러: ${color} | 럭키 숫자: ${num} | 방향: ${dir} | 오늘의 아이템: ${item}`;
 
   document.getElementById('result').style.display = 'block';
   document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
+}
+
+// ── 궁합 ─────────────────────────────────────────────────────────
+function toggleCompat() {
+  const el = document.getElementById('compatSection');
+  el.style.display = el.style.display === 'none' || el.style.display === '' ? 'block' : 'none';
+}
+
+function calcCompat() {
+  const myYear = parseInt(document.getElementById('year').value);
+  const myMonth = parseInt(document.getElementById('month').value);
+  const myDay   = parseInt(document.getElementById('day').value);
+  const theirYear = parseInt(document.getElementById('compat-year').value);
+
+  if (!myYear || !myMonth || !myDay) { alert('먼저 내 생년월일을 입력하고 운세를 조회해주세요!'); return; }
+  if (!theirYear) { alert('상대방 태어난 해를 입력해주세요!'); return; }
+
+  const mySajuYear    = getSajuYear(myYear, myMonth, myDay);
+  const theirSajuYear = getSajuYear(theirYear, 6, 15); // 상대방은 월/일 모르면 중간값
+
+  const myJj    = ((mySajuYear    - 4) % 12 + 12) % 12;
+  const theirJj = ((theirSajuYear - 4) % 12 + 12) % 12;
+  const compat  = getCompatibility(myJj, theirJj);
+
+  document.getElementById('c-stars').textContent  = compat.stars;
+  document.getElementById('c-animals').textContent =
+    `${ANIMALS[myJj]} × ${ANIMALS[theirJj]}`;
+  document.getElementById('c-desc').textContent   = compat.desc;
+  document.getElementById('compatResult').style.display = 'block';
+}
+
+// ── 공유 ─────────────────────────────────────────────────────────
+function shareResult() {
+  const starEl = document.getElementById('r-stars');
+  const stars  = starEl ? starEl.textContent : '';
+  const text   =
+    `🔮 오늘의 사주 운세\n` +
+    `${lastAnimal}  ${stars}\n\n` +
+    `${lastFortune}\n\n` +
+    `✨ 내 생년월일로 운세 보기 👇\nhttps://pig3946.github.io/pig-saju/`;
+
+  if (navigator.share) {
+    navigator.share({ title: '오늘의 사주 운세', text })
+      .catch(() => copyToClipboard(text));
+  } else {
+    copyToClipboard(text);
+  }
+}
+
+function copyToClipboard(text) {
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(text).then(() =>
+      alert('운세가 클립보드에 복사됐어요!\n카카오톡에 붙여넣기 하세요 😊'));
+  } else {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    alert('운세가 클립보드에 복사됐어요!\n카카오톡에 붙여넣기 하세요 😊');
+  }
 }
 </script>
 </body>
